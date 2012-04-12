@@ -1,0 +1,41 @@
+The program will take an input file describing the shape and composition of the lens and output a log which states exactly when each of the target cells were detonated.
+
+The input file is structured as a matrix of characters, each one representing a cell. Each cell is 1cm in real life. The values of each cell is as follows:
+1 -- Composition B. Explosive velocity: 6900 meters/second.
+2 -- Baratol. Explosive velocity: 4900 meters/second.
+D -- Detonation point.
+T -- Target point. Won't move, won't burn. Is reported on.
+W -- Wall. Won't move, won't burn. No reports generated.
+The detonation point is set off first. The shockwave is modeled as it passes through the charge, and when it hits a T cell, the time and the position of the cell is recorded. Once all the T cells are hit, the simulation stops. Here is an example of a lens:
+     11T
+    112T
+   1122T
+  11222T
+ 112222T
+1122222T
+D122222T
+1122222T
+ 112222T
+  11222T
+   1122T
+    112T
+     11T
+The numerical output of that would be:
+(11590, (12, 7))
+(11600, (11, 7))
+(11610, (10, 7))
+(11620, (9, 7))
+(11630, (8, 7))
+(11640, (0, 7))
+(11640, (1, 7))
+(11640, (2, 7))
+(11640, (3, 7))
+(11640, (4, 7))
+(11640, (5, 7))
+(11640, (6, 7))
+(11640, (7, 7))
+Which shows that it would take approximately 11640 nanoseconds (11.64 microseconds) for the shockwave to reach the targets (considering each cell is 1cm across) and that the time difference from the shortest and langest time is only 80 nanoseconds.
+Other notes on input files:
+ * The first line will be used as the standard for all the other lines. Longer lines will be truncated, shorter lines will be filled with walls on the right side until they are long enough.
+ * Adding characters other than those on the table will cause problems (index error).
+ * Don't feed it bad data just to laugh at what it does. That makes it angry and ferocious.

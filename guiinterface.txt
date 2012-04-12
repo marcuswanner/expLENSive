@@ -1,0 +1,19 @@
+The gui will run in a separate thread and is not needed for the operation of the simulation.
+It can be turned off by setting self.gui to False in Field.__init__()
+Functions:
+Initialize(x, y)
+	Set up the window and get ready for an array of size (x, y).
+SendArray(array)
+	Update the display using the array of values sent. This is done every tick and can be used to keep track of ticks.
+ReportHit((x, y))
+	Report a target hit at coords (x, y).
+Finished()
+	The simulation is finished; no more updates will be sent, until the module is re-inported.
+Notes:
+Each element of the array sent in the SendArray contains a tuple of two values. The first is float between 0 and 1 which indicates the burn progress in the cell. If the value is less than 0, the cell is an inert cell and should be displayed as such. The second is an integer value which tells what kind of cell it is.
+1: Wall
+2: Fast explosive
+3: Target
+4: Slow Explosive
+5: Detonator
+With the current design, changing these will affect the GUI.
