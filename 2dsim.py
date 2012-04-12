@@ -99,14 +99,14 @@ class Field():
         if xplus1 > self.xsize-1: xplus1 = self.xsize-1
         if yminus1 < 0: yminus1 = 0
         if yplus1 > self.ysize-1: yplus1 = self.ysize-1
-        count = count + self.array[x][yplus1].IsBurnt()
-        count = count + self.array[x][yminus1].IsBurnt()
-        count = count + self.array[xplus1][yplus1].DiagIsBurnt()
-        count = count + self.array[xplus1][y].IsBurnt()
-        count = count + self.array[xplus1][yminus1].DiagIsBurnt()
-        count = count + self.array[xminus1][yplus1].DiagIsBurnt()
-        count = count + self.array[xminus1][y].IsBurnt()
-        count = count + self.array[xminus1][yminus1].DiagIsBurnt()
+        count += self.array[x][yplus1].IsBurnt()
+        count += self.array[x][yminus1].IsBurnt()
+        count += self.array[xplus1][yplus1].DiagIsBurnt()
+        count += self.array[xplus1][y].IsBurnt()
+        count += self.array[xplus1][yminus1].DiagIsBurnt()
+        count += self.array[xminus1][yplus1].DiagIsBurnt()
+        count += self.array[xminus1][y].IsBurnt()
+        count += self.array[xminus1][yminus1].DiagIsBurnt()
         return count                                                                  
     
     def Calculate(self):
@@ -154,8 +154,7 @@ while 1:
     line = infile.readline()
     if len(line) < 1:
         break
-    if line[len(line)-1] == '\n':
-        line = line[:len(line)-1]
+    line = line.strip('\n\r')
     if not linelength: #use the first line length as the length of all the others
         linelength = len(line)
     line = line + ' ' * (linelength-len(line))
